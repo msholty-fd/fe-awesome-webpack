@@ -6,7 +6,12 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 import { Route, Switch } from 'react-router-dom';
 
-class Router extends React.Component<{}, {}> {
+interface IState {
+  bets: any;
+  createBet: any;
+}
+
+class Router extends React.Component<{}, IState> {
   public render() {
     return (
       <React.Fragment>

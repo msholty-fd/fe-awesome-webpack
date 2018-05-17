@@ -4,10 +4,20 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.tsx',
+  entry: {
+    main: './src/index.tsx',
+    bets: './src/components/Bets/Bets.tsx',
+    createBet: './src/components/CreateBet/CreateBet.tsx',
+    home: './src/components/Home/Home.tsx',
+  },
   devServer: {
     headers: { 'Access-Control-Allow-Origin': '*' },
     historyApiFallback: true,
+  },
+  output: {
+    publicPath: '//localhost:8081/',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -29,6 +39,28 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+  },
+  optimization: {
+    occurrenceOrder: true,
+    splitChunks: {
+      cacheGroups: {
+        blueprintjs: {
+          test: /blueprintjs/,
+          name: 'blueprintjs',
+          chunks: 'all',
+        },
+        'react-dom': {
+          test: /react/,
+          name: 'react',
+          chunks: 'all',
+        },
+        tslib: {
+          test: /tslib/,
+          name: 'tslib',
+          chunks: 'all',
+        },
+      },
+    },
   },
   devtool: 'inline-source-map',
   plugins: [
