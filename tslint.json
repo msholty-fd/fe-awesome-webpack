@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "no-submodule-imports": [false],
+    "object-literal-sort-keys": [false]
+  },
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ]
+}
